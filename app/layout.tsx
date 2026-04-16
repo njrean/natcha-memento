@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Raleway, IBM_Plex_Mono, Kanit, Syne, Inter } from "next/font/google";
+import { Raleway, IBM_Plex_Mono, Kanit, Syne } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const fontSans = Raleway({
+   variable: "--font-sans",
+   subsets: ["latin"],
+});
 
 const fontSerif = Syne({
    variable: "--font-serif",
@@ -35,11 +39,39 @@ export default function RootLayout({
    return (
       <html
          lang="en"
-         className={cn("h-full", "antialiased", fontThai.variable, fontSerif.variable, fontMono.variable, "font-sans", inter.variable)}
+         className={cn("h-full", "antialiased", fontSans.variable, fontThai.variable, fontSerif.variable, fontMono.variable)}
       >
-         <body className="min-h-full flex flex-col">
-            {children}
+         <body className="min-h-full flex flex-col relative">
+
+            <div className="absolute top-0 left-0 z-0 h-dvh w-full grid grid-cols-5">
+
+               <div className="col-span-2"></div>
+               <div className="col-span-2 bg-amber-300 opacity-40 w-120 h-120 blur-3xl"></div>
+               <div className="col-span-1"></div>
+
+               <div className="col-span-1"></div>
+               <div className="col-span-2 bg-purple-400 opacity-30 w-80 h-80 blur-3xl mx-auto"></div>
+               <div className="col-span-1 bg-blue-400 opacity-30 w-50 h-50 blur-2xl mx-auto"></div>
+
+               <div className="col-span-2"></div>
+               <div className="bg-red-400 opacity-60 w-60 h-60 blur-3xl mx-auto"></div>
+               <div className="col-span-2"></div>
+
+            </div>
+
+            <div className="w-full px-2 py-3 z-100">
+               <div className="mx-auto max-w-fit border border-gray-300 bg-white/50 backdrop-blur-sm flex gap-5 justify-center p-2">
+                  <Button variant="ghost">E Pluribus Unum</Button>
+                  <Button variant="ghost">Pagina Prima</Button>
+                  <Button variant="ghost">Little Travel Book</Button>
+               </div>
+            </div>
+
+            <div className="z-1000">
+               {children}
+            </div>
+
          </body>
-      </html>
+      </html >
    );
 }
